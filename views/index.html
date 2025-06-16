@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rastreador de Ejercicios</title>
+    <link
+      rel="shortcut icon"
+      href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+          <div class="card shadow-sm mb-4">
+            <div class="card-body">
+              <h1 class="card-title text-center mb-4">
+                Rastreador de Ejercicios
+              </h1>
+              <form action="/api/users" method="post" class="mb-4">
+                <h2 class="h5 mb-3">Crear un nuevo usuario</h2>
+                <p><code>POST /api/users</code></p>
+                <div class="input-group mb-3">
+                  <input
+                    id="uname"
+                    type="text"
+                    name="username"
+                    class="form-control"
+                    placeholder="username"
+                    required
+                  />
+                  <button class="btn btn-primary" type="submit">Crear</button>
+                </div>
+              </form>
+              <form
+                action="/api/users/:_id/exercises"
+                id="exercise-form"
+                method="post"
+                class="mb-4"
+              >
+                <h2 class="h5 mb-3">Añadir ejercicio</h2>
+                <p><code>POST /api/users/:_id/exercises</code></p>
+                <div class="mb-3">
+                  <input
+                    id="uid"
+                    type="text"
+                    name="id"
+                    class="form-control mb-2"
+                    placeholder=":_id"
+                    required
+                  />
+                  <input
+                    id="desc"
+                    type="text"
+                    name="description"
+                    class="form-control mb-2"
+                    placeholder="description*"
+                    required
+                  />
+                  <input
+                    id="dur"
+                    type="number"
+                    step="1"
+                    name="duration"
+                    class="form-control mb-2"
+                    placeholder="duration* (mins.)"
+                    required
+                  />
+                  <input
+                    id="date"
+                    type="text"
+                    name="date"
+                    class="form-control mb-2"
+                    placeholder="date (yyyy-mm-dd)"
+                    pattern="^\d{4}[-/](0[1-9]|1[0-2])[-/](0[1-9]|[12]\d|3[01])$"
+                    required
+                  />
+                </div>
+                <button class="btn btn-success w-100" type="submit">
+                  Añadir
+                </button>
+              </form>
+              <div class="alert alert-info">
+                <strong>Obtener el registro de ejercicios del usuario:</strong>
+                <code>GET /api/users/:_id/logs?[from][&amp;to][&amp;limit]</code
+                ><br />
+                <span class="small"
+                  >[ ] = opcional<br />de, a = fechas (yyyy-mm-dd); limite =
+                  number</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const exerciseForm = document.getElementById("exercise-form");
+      exerciseForm.addEventListener("submit", (e) => {
+        const userId = document.getElementById("uid").value;
+        exerciseForm.action = `/api/users/${userId}/exercises`;
+      });
+    </script>
+  </body>
+</html>
