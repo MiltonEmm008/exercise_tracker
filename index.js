@@ -12,7 +12,7 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 mongoose
-  .connect("mongodb://localhost:27017/exercise")
+  .connect(process.env.MONGOURL)
   .then(() => console.log("Conectado a mongodb"))
   .catch((err) =>
     console.error("Sucedio un error al conectarse a mongodb ", err)
